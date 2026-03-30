@@ -33,15 +33,13 @@ console.log(secret); // ❌ ReferenceError`,
     topic: "Semicolons",
     question: "Why do semicolons matter in JavaScript?",
     answer: `
-      Semicolons mark the end of a statement. While JS uses <strong>Automatic Semicolon Insertion (ASI)</strong>
-      to add them in many cases, relying on ASI can cause subtle bugs when a line starts with
-      <code>(</code>, <code>[</code>, or a template literal.
+      Semicolons mark the end of a statement. It tells JavaScript you are done with this statement. This is especially important with writing a single statement on multiple lines, such as defining an Object. 
     `,
-    code: `// ASI bug classic
+    code: `// Missing semicolon
 const a = 1
 const b = 2
 [a, b].forEach(console.log)
-// JS reads lines 2+3 as: 2[a, b]
+// JS reads lines 2+3 as: 2[a, b] because the semicolon is missing after "b"
 // → TypeError!`,
   },
   {
