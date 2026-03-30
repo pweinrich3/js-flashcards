@@ -105,4 +105,42 @@ function add(a, b) {
 function broken(a, b {
   return a + b;`,
   },
+  {
+    topic: "Object Properties",
+    question: "What are object properties and how do you access them?",
+    answer: `
+      A <strong>property</strong> is a named value stored on an object — a key paired with a value of any type.
+      There are two ways to access properties:
+      <ul>
+        <li><strong>Dot notation</strong> <code>obj.key</code> — use when the key is a valid identifier and known at write time</li>
+        <li><strong>Bracket notation</strong> <code>obj["key"]</code> — use when the key is dynamic, a variable, or contains special characters</li>
+      </ul>
+      You can also <strong>add</strong>, <strong>update</strong>, or <strong>delete</strong> properties at any time:
+      <ul>
+        <li><code>obj.newKey = value</code> — adds or updates</li>
+        <li><code>delete obj.key</code> — removes the property entirely</li>
+        <li><code>Object.keys(obj)</code> — returns an array of all own property names</li>
+      </ul>
+    `,
+    code: `const car = { make: "Toyota", year: 2023 };
+
+// dot notation
+car.make;              // "Toyota"
+
+// bracket notation (useful with variables)
+const field = "year";
+car[field];            // 2023
+
+// add / update
+car.color = "blue";    // adds new property
+car.year = 2024;       // updates existing
+
+// delete
+delete car.color;
+
+// enumerate
+Object.keys(car);      // ["make", "year"]
+Object.values(car);    // ["Toyota", 2024]
+Object.entries(car);   // [["make","Toyota"],["year",2024]]`,
+  },
 ];
