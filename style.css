@@ -1,0 +1,373 @@
+/* ============================================================
+   style.css — JavaScript Flashcards
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface-2: #22263a;
+  --border: #2d3148;
+  --accent: #7c6af7;
+  --accent-light: #9d8fff;
+  --accent-glow: rgba(124, 106, 247, 0.25);
+  --text: #e8eaf0;
+  --text-muted: #7a7f9a;
+  --green: #4ade80;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --blue: #60a5fa;
+  --card-radius: 16px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-light), #a78bfa, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Main layout ─────────────────────────────────────── */
+main {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ── Controls ────────────────────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.card-counter {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  transition: background var(--transition), transform 0.1s;
+}
+.btn:active { transform: scale(0.96); }
+
+.btn-secondary {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* ── Progress bar ────────────────────────────────────── */
+.progress-bar {
+  height: 4px;
+  background: var(--surface-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* ── Card viewport ───────────────────────────────────── */
+.card-viewport {
+  perspective: 1400px;
+}
+
+/* ── Flashcard ───────────────────────────────────────── */
+.flashcard {
+  width: 100%;
+  min-height: 340px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.flashcard:focus-visible .card-inner {
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--accent);
+}
+
+.card-inner {
+  width: 100%;
+  min-height: 340px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--card-radius);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.35),
+    0 1px 0 rgba(255,255,255,0.04) inset;
+}
+
+.flashcard.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+/* Front */
+.card-front {
+  background: linear-gradient(145deg, var(--surface), var(--surface-2));
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 0%, var(--accent-glow), transparent 65%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Back */
+.card-back {
+  background: linear-gradient(145deg, #171b2e, #1e2238);
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.card-back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 40% 100%, rgba(96, 165, 250, 0.12), transparent 65%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Labels */
+.card-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  opacity: 0.8;
+}
+
+/* Topic badge */
+.card-topic {
+  display: inline-block;
+  background: var(--accent-glow);
+  border: 1px solid rgba(124, 106, 247, 0.4);
+  color: var(--accent-light);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  margin-top: 0.25rem;
+}
+
+/* Question */
+.card-question {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+/* Flip hint */
+.flip-hint {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Answer */
+.card-answer {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.card-answer ul {
+  padding-left: 1.2rem;
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.card-answer li {
+  color: #cbd0e8;
+}
+
+.card-answer code {
+  background: rgba(255,255,255,0.08);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
+  font-size: 0.88em;
+  color: #a5b4fc;
+}
+
+.card-answer strong {
+  color: var(--text);
+}
+
+/* Code block */
+.card-code {
+  margin-top: 0.75rem;
+  background: #0d1117;
+  border: 1px solid #2d3148;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #cdd6f4;
+  flex-shrink: 0;
+}
+
+/* Syntax highlighting */
+.hl-keyword { color: #c792ea; font-weight: 600; }
+.hl-string  { color: #a3e635; }
+.hl-comment { color: #546e7a; font-style: italic; }
+.hl-number  { color: var(--yellow); }
+
+/* ── Nav buttons ─────────────────────────────────────── */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.btn-nav {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.55rem 1.2rem;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  min-width: 100px;
+}
+
+.btn-nav:hover:not(:disabled) {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.btn-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Dot navigation ──────────────────────────────────── */
+.dot-nav {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  padding: 0;
+}
+
+.dot:hover {
+  background: var(--text-muted);
+  transform: scale(1.3);
+}
+
+.dot-active {
+  background: var(--accent);
+  transform: scale(1.4);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 480px) {
+  body { padding: 1.5rem 0.75rem 3rem; }
+
+  .card-face { padding: 1.5rem; }
+  .flashcard, .card-inner { min-height: 300px; }
+
+  .btn-nav { min-width: 80px; font-size: 0.82rem; }
+}

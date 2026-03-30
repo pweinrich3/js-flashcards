@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Flashcards</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>JavaScript Flashcards</h1>
+    <p class="subtitle">Click a card to reveal the answer</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <span class="card-counter" id="cardCounter">Card 1 / 5</span>
+      <div class="btn-group">
+        <button id="shuffleBtn" class="btn btn-secondary" title="Shuffle cards">⇄ Shuffle</button>
+        <button id="resetBtn" class="btn btn-secondary" title="Reset progress">↺ Reset</button>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="card-viewport">
+      <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-label="Flashcard — press Enter or Space to flip">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-label">Question</div>
+            <div class="card-topic" id="cardTopic"></div>
+            <div class="card-question" id="cardQuestion"></div>
+            <div class="flip-hint">tap to flip ↓</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="card-label">Answer</div>
+            <div class="card-answer" id="cardAnswer"></div>
+            <pre class="card-code"><code id="cardCode"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button id="prevBtn" class="btn btn-nav" disabled>← Prev</button>
+      <div class="dot-nav" id="dotNav" role="list" aria-label="Card navigation"></div>
+      <button id="nextBtn" class="btn btn-nav">Next →</button>
+    </div>
+  </main>
+
+  <script src="cards.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
