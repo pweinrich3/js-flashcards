@@ -43,23 +43,6 @@ const b = 2
 // → TypeError!`,
   },
   {
-    topic: "Attributes",
-    question: "What are HTML attributes and how do you access them in JavaScript?",
-    answer: `
-      Attributes provide extra information about HTML elements (e.g. <code>id</code>, <code>class</code>,
-      <code>href</code>, <code>data-*</code>). In JavaScript, access them via:
-      <ul>
-        <li><code>element.getAttribute("name")</code> — any attribute</li>
-        <li><code>element.id</code> / <code>element.className</code> — common ones as direct properties</li>
-        <li><code>element.dataset.key</code> — for <code>data-*</code> attributes</li>
-      </ul>
-    `,
-    code: `const btn = document.querySelector("#myBtn");
-btn.getAttribute("data-action"); // "submit"
-btn.dataset.action;              // "submit"
-btn.id;                          // "myBtn"`,
-  },
-  {
     topic: "Objects",
     question: "What is an object in JavaScript?",
     answer: `
