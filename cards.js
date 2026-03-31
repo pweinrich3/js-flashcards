@@ -23,24 +23,13 @@ const CARDS = [
         <li><strong>Block</strong> — accessible only within the block <code>{ }</code> (with <code>let</code>/<code>const</code>)</li>
       </ul>
     `,
-    code: `// block scope example
-if (true) {
-  let secret = "block-only";
-}
-console.log(secret); // ❌ ReferenceError`,
   },
   {
     topic: "Semicolons",
     question: "Why do semicolons matter in JavaScript?",
     answer: `
-      Semicolons mark the end of a statement. It tells JavaScript you are done with this statement. This is especially important with writing a single statement on multiple lines, such as defining an Object. 
+      Semicolons mark the end of a statement. It tells JavaScript you are done with this statement. This is especially important with writing a single statement on multiple lines, such as defining an Object.
     `,
-    code: `// Missing semicolon
-const a = 1
-const b = 2
-[a, b].forEach(console.log)
-// JS reads lines 2+3 as: 2[a, b] because the semicolon is missing after "b"
-// → TypeError!`,
   },
   {
     topic: "Objects",
@@ -54,17 +43,6 @@ const b = 2
         <li>Access with <strong>bracket notation</strong>: <code>obj["key"]</code></li>
       </ul>
     `,
-    code: `const user = {
-  name: "Paul",
-  role: "dev",
-  greet() {
-    return \`Hi, I'm \${this.name}\`;
-  }
-};
-
-user.role;     // "dev"  (dot notation)
-user["name"];  // "Paul" (bracket notation)
-user.greet();  // "Hi, I'm Paul"`,
   },
   {
     topic: "Syntax",
@@ -79,14 +57,6 @@ user.greet();  // "Hi, I'm Paul"`,
         <li>Identifiers are case-sensitive (<code>myVar ≠ myvar</code>)</li>
       </ul>
     `,
-    code: `// valid syntax
-function add(a, b) {
-  return a + b;
-}
-
-// syntax error — missing closing brace
-function broken(a, b {
-  return a + b;`,
   },
   {
     topic: "Object Properties",
@@ -105,25 +75,5 @@ function broken(a, b {
         <li><code>Object.keys(obj)</code> — returns an array of all own property names</li>
       </ul>
     `,
-    code: `const car = { make: "Toyota", year: 2023 };
-
-// dot notation
-car.make;              // "Toyota"
-
-// bracket notation (useful with variables)
-const field = "year";
-car[field];            // 2023
-
-// add / update
-car.color = "blue";    // adds new property
-car.year = 2024;       // updates existing
-
-// delete
-delete car.color;
-
-// enumerate
-Object.keys(car);      // ["make", "year"]
-Object.values(car);    // ["Toyota", 2024]
-Object.entries(car);   // [["make","Toyota"],["year",2024]]`,
   },
 ];
